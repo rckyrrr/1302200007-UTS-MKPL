@@ -1,7 +1,7 @@
 package lib;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,9 +18,9 @@ public class Employee {
 	private boolean isForeigner;
 	private Gender gender; //true = Laki-laki, false = Perempuan
 	
-	private int monthlySalary;
-	private int otherMonthlyIncome;
-	private int annualDeductible;
+	private BigDecimal monthlySalary;
+	private BigDecimal otherMonthlyIncome;
+	private BigDecimal annualDeductible;
 	
 	private String spouseName;
 	private String spouseIdNumber;
@@ -55,29 +55,29 @@ public class Employee {
 	
 	public void setMonthlySalary(int grade) {    
 		if (grade == 1) {
-			monthlySalary = 3000000;
+			monthlySalary = new BigDecimal("3000000");
 			if (this.isForeigner) {
-				monthlySalary = (int) (3000000 * 1.5);
+				monthlySalary = monthlySalary.multiply(new BigDecimal("1.5"));
 			}
 		}else if (grade == 2) {
-			monthlySalary = 5000000;
+			monthlySalary = new BigDecimal("5000000");
 			if (this.isForeigner) {
-				monthlySalary = (int) (3000000 * 1.5);
+				monthlySalary = monthlySalary.multiply(new BigDecimal("1.5"));
 			}
 		}else if (grade == 3) {
-			monthlySalary = 7000000;
+			monthlySalary = new BigDecimal("7000000");
 			if (this.isForeigner) {
-				monthlySalary = (int) (3000000 * 1.5);
+				monthlySalary = monthlySalary.multiply(new BigDecimal("1.5"));
 			}
 		}
 	}
 
 	
-	public void setAnnualDeductible(int deductible) {	
+	public void setAnnualDeductible(BigDecimal deductible) {	
 		this.annualDeductible = deductible;
 	}
 	
-	public void setAdditionalIncome(int income) {	
+	public void setAdditionalIncome(BigDecimal income) {	
 		this.otherMonthlyIncome = income;
 	}
 	
@@ -94,13 +94,13 @@ public class Employee {
 	/**
 	 * @return
 	 */
-	public int getAnnualIncomeTax() {
+	public BigDecimal getAnnualIncomeTax() {
 		// Menghitung berapa lama pegawai bekerja dalam setahun ini, jika pegawai sudah bekerja dari tahun sebelumnya maka otomatis dianggap 12 bulan.
 		LocalDate currentDate = LocalDate.now();
 		int monthWorkingInYear = 12;
 		if (currentDate.getYear() == joinDate.getYear()) {
-			monthWorkingInYear = currentDate.getMonthValue() 
+			
 		}
-
+		return annualDeductible;
 	}
 }
